@@ -27,6 +27,9 @@
 
 <body>
 
+
+
+
     <nav class="navbar navbar-dark bg-dark">
 
         <a href="#" class="navbar-brand nav-link">Foodapp</a>
@@ -37,15 +40,35 @@
             <a class="nav-item nav-link " href="#" style="color:blue; margin-right: 10px;">Delete Item</a>
             <a class="nav-item nav-link " href="#" style="color:blue; margin-right: 10px;"> View Item</a>
         </div>
+        {% if user.is_authenticated %}
+        <!--  this will authenticated if user is logged in or not  -->
+        <!-- when user is logged in then it will show logout option and if user is logged out then it will show login option    -->
+        <form method="POST" action="{% url 'logout' %}" style="display:inline;">
+            <!--   this form is used coz logout needs post method to be executed -->
+            {% csrf_token %}
+            <button type="submit" class="btn btn-link text-light" style="text-decoration:none;">Logout</button>
+        </form>
+        <a href="{% url 'profile' %}" class="nav-item nav-link text-light px-3">profile</a>
+
+        {% else %}
+        <a href="{% url 'login' %}" class="nav-item nav-link text-light px-3">Login</a>
+
+
+        {% endif %}
+
 
     </nav>
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-{{message.tags}}">
-                        {{message}}
-                    </div>
-                {% endfor %}
-            {% endif %}
+
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}}">
+        {{message}}
+    </div> 
+
+    
+    {% endfor %}
+    {% endif %}
     {% block body %}
     {% endblock %}
 

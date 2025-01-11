@@ -1,5 +1,5 @@
 from django.shortcuts import redirect,render
-
+from django.contrib.auth.decorators import login_required
 
 # Importing the built-in Django form for creating new user accounts.
 # The line from django.contrib.auth.forms import UserCreationForm imports the UserCreationForm class from Django's authentication module,
@@ -21,10 +21,15 @@ def register(request):
         if form.is_valid():
             form.save()
             username =form.cleaned_data.get('username')
-            messages.success(request,f'Welcome {username}, your account is created..')
-            return redirect('index')
+            messages.success(request,f'Welcome {username}, you are logged in....')
+            return redirect('login')
     else:
         # form = UserCreationForm()          previous code which donot contain emaifield
         form = RegisterForm()
     return render(request,'users/register.html',{'form':form})
         
+
+@login_required
+def profilepage (request):
+        return render(request,'users/profile.html')
+ 

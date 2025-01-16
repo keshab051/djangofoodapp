@@ -1,7 +1,8 @@
 from django.urls import path
 from . import views
 urlpatterns = [
-    path("",views.index,name='index'),
+    path("",views.IndexClassView.as_view(),name='index'),       # class based view ko lai ra class based view ma .as view garna jaruri xa
+    # path("",views.IndexClassView.as_view(),name='index'),      funtion based view ko lai 
     path('item/',views.item,name='item'),
     path('<int:item_id>/',views.detail,name='detail'),
     # for adding item from website insted of admin pannel

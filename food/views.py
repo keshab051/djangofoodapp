@@ -26,12 +26,12 @@ def item(request):
 
 # function based view
 
-def detail(request,item_id):
-    item=Item.objects.get(pk = item_id)
-    context={
-              'item':item,
-             }
-    return render(request, 'food/detail.html',context)
+# def detail(request,item_id):
+#     item=Item.objects.get(pk = item_id)
+#     context={
+#               'item':item,
+#              }
+#     return render(request, 'food/detail.html',context)
 
 # class based DetailView
 class FoodDetail(DetailView):  # DetailView lai inherite gareko hamro aafno class based view ma

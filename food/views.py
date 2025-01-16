@@ -4,6 +4,7 @@ from .models import Item
 from django.template import loader
 from .forms import ItemForm
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 # Create your views here.
 
 # def index(request):
@@ -23,7 +24,7 @@ class IndexClassView(ListView):          # class based view jasma ListView lai i
 def item(request):
     return HttpResponse('hello')
 
-
+# function based view
 
 def detail(request,item_id):
     item=Item.objects.get(pk = item_id)
@@ -31,6 +32,12 @@ def detail(request,item_id):
               'item':item,
              }
     return render(request, 'food/detail.html',context)
+
+# class based DetailView
+class FoodDetail(DetailView):  # DetailView lai inherite gareko hamro aafno class based view ma
+    model =Item
+    template_name = 'food/detail.html'
+
 
 
 def create_item(request):

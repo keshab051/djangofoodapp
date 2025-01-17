@@ -5,6 +5,9 @@ from django.template import loader
 from .forms import ItemForm
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
+
 # Create your views here.
 
 # def index(request):
@@ -48,6 +51,15 @@ def create_item(request):
         return redirect('index')
     
     return render(request,'food/item-form.html',{'forms':form})
+
+class CreateItem(CreateView):
+    model = Item
+    fields = ['item_name','item_desc','item_price','item_image']
+    template_name = 'food/item-form.html'
+    def form_valid(self, forms):
+        forms.instance.user_name = self.request.user
+        return super().form_valid(forms)
+         
 
 def update_item(request,id):
     item=Item.objects.get(pk=id)

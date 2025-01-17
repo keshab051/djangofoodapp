@@ -16,6 +16,7 @@ ma janxa ani execute garxa ani further execution
       <h1>{{object.item_name}}</h1>
       <h2>{{object.item_desc}}</h2>
       <h3>${{object.item_price}}</h3>
+      <h3>posted by - {{object.user_name}}</h3>
       <a href="{% url 'delete_item' item.id %}" class="btn btn-success">Delete</a><br><br>
       <a   href="{% url 'update_item' item.id %}" class="btn btn-success">update_item</a>
     </div>

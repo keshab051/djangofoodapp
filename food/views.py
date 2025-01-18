@@ -42,16 +42,18 @@ class FoodDetail(DetailView):  # DetailView lai inherite gareko hamro aafno clas
     template_name = 'food/detail.html'
 
 
-
-def create_item(request):
-    form =ItemForm(request.POST or None)
+# function based createitem views
+# def create_item(request):
+#     form =ItemForm(request.POST or None)
      
-    if form.is_valid():
-        form.save()
-        return redirect('index')
+#     if form.is_valid():
+#         form.save()
+#         return redirect('index')
     
-    return render(request,'food/item-form.html',{'forms':form})
+#     return render(request,'food/item-form.html',{'forms':form})
 
+
+# class based createitem views 
 class CreateItem(CreateView):
     model = Item
     fields = ['item_name','item_desc','item_price','item_image']
@@ -59,7 +61,7 @@ class CreateItem(CreateView):
     def form_valid(self, forms):
         forms.instance.user_name = self.request.user
         return super().form_valid(forms)
-         
+  
 
 def update_item(request,id):
     item=Item.objects.get(pk=id)

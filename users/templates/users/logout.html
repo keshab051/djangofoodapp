@@ -1,5 +1,7 @@
 {% extends 'food/base.html' %}
  
+{% block body %}
     <h1>You are sucessfully logged out..</h1>
     <h3>login another account</h3>
     <a href="{% url 'login' %}" class="btn btn-success">login</a>
+{%endblock%}
